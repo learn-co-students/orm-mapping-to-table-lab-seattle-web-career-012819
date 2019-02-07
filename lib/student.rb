@@ -42,8 +42,6 @@ class Student
   end
 
   def self.create(name:,grade:)
-    @name = name
-    @grade = grade
     new_student = Student.new(@name, @grade)
     new_student.save
     new_student
