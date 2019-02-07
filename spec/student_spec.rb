@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe "Student" do
-  let(:josh) {Student.new("Josh", "9th")}
+  let(:josh) {Student.new("Josh", "9")}
 
   before(:each) do
     DB[:conn].execute("DROP TABLE IF EXISTS students")
@@ -9,13 +9,13 @@ describe "Student" do
 
   describe "when initialized with a name and a grade" do
     it 'the name attribute can be accessed' do
-      student = Student.new("Tiffany", "11th")
+      student = Student.new("Tiffany", "11")
       expect(student.name).to eq("Tiffany")
     end
 
     it 'the grade attribute can be accessed' do
-      student = Student.new("Tiffany", "11th")
-      expect(student.grade).to eq("11th")
+      student = Student.new("Tiffany", "11")
+      expect(student.grade).to eq("11")
     end
   end
 
@@ -49,7 +49,7 @@ describe "Student" do
       Student.create_table
       josh.save
       expect(josh.id).to eq(1)
-      expect(DB[:conn].execute("SELECT * FROM students")).to eq([[1, "Josh", "9th"]])
+      expect(DB[:conn].execute("SELECT * FROM students")).to eq([[1, "Josh", "9"]])
     end
   end
 
@@ -58,14 +58,14 @@ describe "Student" do
       Student.create_table
     end
     it 'takes in a hash of attributes and uses metaprogramming to create a new student object. Then it uses the #save method to save that student to the database' do
-      Student.create(name: "Sally", grade: "10th")
-      expect(DB[:conn].execute("SELECT * FROM students")).to eq([[1, "Sally", "10th"]])
+      Student.create(name: "Sally", grade: "10")
+      expect(DB[:conn].execute("SELECT * FROM students")).to eq([[1, "Sally", "10"]])
     end
     it 'returns the new object that it instantiated' do
-      student = Student.create(name: "Josh", grade: "9th")
+      student = Student.create(name: "Josh", grade: "9")
       expect(student).to be_a(Student)
       expect(student.name).to eq("Josh")
-      expect(student.grade).to eq("9th")
+      expect(student.grade).to eq("9")
     end
   end
 end
